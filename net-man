@@ -1,0 +1,9 @@
+#!/bin/bash
+command="$1"
+if [ "$1" = "" ]
+then
+	echo "What manual page do you want?"
+else
+	man_section=$(w3m http://linux.die.net/man/${command:0:1}.html  | grep -m1 ^$command | grep -Po '(?<=\().*(?=\))')
+	w3m  http://linux.die.net/man/$man_section/$command | less
+fi
