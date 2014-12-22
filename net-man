@@ -5,5 +5,5 @@ then
 	echo "What manual page do you want?"
 else
 	man_section=$(w3m http://linux.die.net/man/${command:0:1}.html  | grep -m1 ^$command | grep -Po '(?<=\().*(?=\))')
-	w3m  http://linux.die.net/man/$man_section/$command | less
+	w3m  http://linux.die.net/man/$man_section/$command | sed -e 's/\[INS\:\:INS\]//' |  sed  '/Site Search.*/,$d' | less
 fi
